@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+        }
+        .container {
+            position: relative;
+            overflow: hidden;
+            min-height: 480px;
+            width: 768px;
+            max-width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 32, 63, 0.45), 0 8px 8px rgba(0, 32, 63, 0.45);
+        }
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transition: transform .6s ease-in-out;
+        }
+        .sign-up-container {
+            left: 0;
+            opacity: 0;
+            z-index: 1;
+        }
+        .container.panel-active .sign-up-container {
+            transform: translateX(100%);
+            z-index: 5;
+            opacity: 1;
+            animation: show .6s;
+        }
+        @keyframes show {
+            0%, 49.99% {
+                opacity: 0;
+                z-index: 1;
+            }
+            50%, 100% {
+                opacity: 1;
+                z-index: 5;
+            }
+        }
+        .container.panel-active .login-container {
+            transform: translateX(100%);
+        }
+        .login-container {
+            left: 0;
+            z-index: 2;
+        }
+        form {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 50px;
+            height: 100%;
+            text-align: center;
+        }
+        input {
+            background-color: #adf0d1;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+        }
+        button.ghost {
+            background-color: transparent;
+        }
+        button {
+            background-color: #adf0d1;
+            color: #00203f;
+            border: 1px solid #adf0d1;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 16px 32px;
+            margin-top: 24px;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            border-color: rgba(0, 32, 63, 0.45);
+            transition: .2s ease-in;
+        }
+        button:hover {
+            cursor: pointer;
+            background-color: #00203f;
+            color: #adf0d1;
+        }
+        button:active {
+            transform: scale(.95);
+        }
+        .social-container {
+            margin: 24px 0;
+        }
+        .social-container a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 4px;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: #adf0d1;
+            border: 1px solid rgba(0, 32, 63, 0.45);
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        span {
+            font-size: 14px;
+        }
+        a {
+            text-decoration: none;
+            font-size: 14px;
+            margin: 8px 0 16px;
+            color: #333;
+        }
+        .overlay-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 100;
+            transition: transform .6s ease-in-out;
+        }
+        .container.panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+        .overlay {
+            background: linear-gradient(to right, #adf0d1, #e7f0fd);
+            color: #00203f;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: transform .6s ease-in-out;
+        }
+        .container.panel-active .overlay {
+            transform: translateX(50%);
+        }
+        .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transition: transform .6s ease-in-out;
+        }
+        .overlay-left {
+            transform: translateX(-20%);
+        }
+        .container.panel-active .overlay-left {
+            transform: translateX(0);
+        }
+        .overlay-right {
+            right: 0;
+            transform: translateX(0);
+        }
+        .container.panel-active .overlay-right {
+            transform: translateX(20%);
+        }
+        p {
+            font-size: 14px;
+            font-weight: 100;
+            line-height: 20px;
+            letter-spacing: .5px;
+            margin: 20px 0 30px;
+        }
+    </style>
+    <title>Formulaire d'Inscription et de Connexion</title>
+</head>
+<body>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form id="signUpForm">
+            <h1>Créer un Compte</h1>
+            <div class="social-container">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>Utiliser un compte Gmail</span>
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" placeholder="Nom">
+            <span class="error" id="NomError"></span>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email">
+            <span class="error" id="EmailError"></span>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" placeholder="Mot de passe">
+            <span class="error" id="PasswordError"></span>
+            <button type="submit">Créer le compte</button>
+        </form>
+    </div>
+    <div class="form-container login-container">
+        <form id="loginForm">
+            <h1>Se Connecter</h1>
+            <div class="social-container">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>Je n'ai pas de compte</span>
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="Email">
+            <span class="error" id="LoginEmailError"></span>
+            <label for="loginPassword">Mot de passe</label>
+            <input type="password" id="loginPassword" placeholder="Mot de passe">
+            <span class="error" id="LoginPasswordError"></span>
+            <button type="submit">Se Connecter</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Bonjour!</h1>
+                <p>Si vous avez déjà un compte, veuillez vous connecter ici.</p>
+                <button class="ghost" id="login">Se Connecter</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Bienvenue!</h1>
+                <p>Pour rester connecté avec nous, créez un compte ici.</p>
+                <button class="ghost" id="signup">Créer un compte</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('container');
+    const loginButton = document.getElementById('login');
+    const signUpButton = document.getElementById('signup');
+    signUpButton.addEventListener('click', () => {
+        container.classList.add('panel-active');
+    });
+    loginButton.addEventListener('click', () => {
+        container.classList.remove('panel-active');
+    });
+});
+
+const errors = document.querySelectorAll('.error');
+for (let i = 0; i < errors.length; i++) {
+    errors[i].style.display = 'none';
+}
+
+document.getElementById('signUpForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const nom = document.getElementById('nom').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    let nomOk = true;
+    let emailOk = true;
+    let passwordOk = true;
+
+    document.getElementById('NomError').style.display = "none";
+    document.getElementById('EmailError').style.display = "none";
+    document.getElementById('PasswordError').style.display = "none";
+
+    if (nom.length < 3) {
+        nomOk = false;
+        document.getElementById('NomError').innerText = "Le nom doit contenir au moins 3 caractères";
+        document.getElementById('NomError').style.display = "block";
+    }
+
+    if (nom.length > 15) {
+        nomOk = false;
+        document.getElementById('NomError').innerText = "Le nom doit contenir au maximum 15 caractères";
+        document.getElementById('NomError').style.display = "block";
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        emailOk = false;
+        document.getElementById('EmailError').innerText = "Veuillez entrer une adresse email valide";
+        document.getElementById('EmailError').style.display = "block";
+    }
+
+    if (password.length < 8 || password.length > 10) {
+        passwordOk = false;
+        document.getElementById('PasswordError').innerText = "Le mot de passe doit contenir entre 8 et 10 caractères";
+        document.getElementById('PasswordError').style.display = "block";
+    }
+
+    if (nomOk && emailOk && passwordOk) {
+        e.target.submit(); // Décommenter pour activer l'envoi du formulaire
+        alert('Formulaire soumis avec succès!');
+    }
+});
+</script>
+</body>
+</html>

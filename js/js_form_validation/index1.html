@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Formulaire d'Inscription et de Connexion</title>
+</head>
+<body>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form id="signUpForm">
+            <h1>Créer un Compte</h1>
+            <div class="social-container">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>Utiliser un compte Gmail</span>
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" placeholder="Nom">
+            <span class="error" id="NomError"></span>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email">
+            <span class="error" id="EmailError"></span>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" placeholder="Mot de passe">
+            <span class="error" id="PasswordError"></span>
+            <button type="submit">Créer le compte</button>
+        </form>
+    </div>
+
+    <div class="form-container login-container">
+        <form id="loginForm">
+            <h1>Se Connecter</h1>
+            <div class="social-container">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>Je n'ai pas de compte</span>
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="Email">
+            <span class="error" id="LoginEmailError"></span>
+            <label for="loginPassword">Mot de passe</label>
+            <input type="password" id="loginPassword" placeholder="Mot de passe">
+            <span class="error" id="LoginPasswordError"></span>
+            <button type="submit">Se Connecter</button>
+        </form>
+    </div>
+    
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <button class="ghost" id="login">Se Connecter</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <button class="ghost" id="signup">Créer un compte</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="script.js" charset="UTF-8"></script>
+</body>
+</html>
+
