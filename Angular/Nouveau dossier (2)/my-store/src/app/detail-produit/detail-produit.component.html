@@ -1,0 +1,7 @@
+<div *ngIf="product" class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title | uppercase }}</h5>
+    <p class="card-text">{{ product.price | currency : 'EUR' }}</p>
+    <p class="card-text">{{ product.description }}</p>
+  </div>
+</div>

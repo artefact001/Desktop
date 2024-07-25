@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let product of products">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.title | uppercase }}</h5>
+          <p class="card-text">{{ product.price | currency : 'EUR' }}</p>
+          <button class="btn btn-primary" (click)="onSelect(product)">Voir détails</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-detail-produit *ngIf="selectedProduct" [product]="selectedProduct"></app-detail-produit>
+</div>
